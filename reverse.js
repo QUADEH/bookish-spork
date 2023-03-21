@@ -1,9 +1,6 @@
-function reverseText(text) {
-  return [...text].reverse().join("");
-}
+let input = document.querySelector('input');
+let output = document.querySelector('output');
 
-function reverseTextarea() {
-  let textarea = document.getElementById("myTextarea");
-  let reversedText = reverseText(textarea.value);
-  textarea.value = reversedText;
-}
+input.addEventListener('input', function(e) {
+  output.textContent = e.target.value.split('').reverse().join('');
+});
