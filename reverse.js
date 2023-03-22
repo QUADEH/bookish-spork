@@ -8,9 +8,9 @@ function reverseText(text) {
 }
 
 function handleClick () {
-  let text = input.textContent;
+  let text = input.value;
   let reversed = reverseText(text);
-  output.textContent = reversed;
+  output.value = reversed;
 }
 
 reverse.addEventListener('click', handleClick);
