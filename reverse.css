@@ -1,17 +1,17 @@
 div {
-    display: block;
+  display: block;
 }
 body {
-    background: #ff3700;
-    color: #fff;
+  background: #ff3700;
+  color: #fff;
 }
 
 body, textarea {
-    font-family: helvetica, sans-serif;
+  font-family: helvetica, sans-serif;
 }
 html {
-    font-family: sans-serif;
-    line-height: 1.15;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
+  font-family: sans-serif;
+  line-height: 1.15;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
