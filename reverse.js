@@ -1,25 +1,28 @@
-let reverse = document.querySelector("#reverse");
-let rot13 = document.querySelector("#rot13");
-let input = document.querySelector("#input");
-let output = document.querySelector("#output");
-let fromBinary = document.querySelector("#fromBinary");
+//My Query Selectors
+
+let reverse = document.querySelector("#reverse"); // Refers to the the "reverse" ID in the HTML
+let rot13 = document.querySelector("#rot13"); // "rot13" ID in the HTML
+let input = document.querySelector("#input"); // "input" ID in the HTML
+let output = document.querySelector("#output");// "output" ID in the HTML
+let fromBinary = document.querySelector("#fromBinary"); // "fromBinary" ID in the HTML
+let toHex = document.querySelector("#toHex"); // "toHex" ID in the HTML
 
 
 function reverseText(text) {
-  let reversedText = text.split("").reverse().join("");
-  return reversedText;
+  let reversedText = text.split("").reverse().join(""); // Splits the string, reverses the characters, then rejoins them
+  return reversedText; // Returns the the text reversed
 }
 
 function rot13Text(text) {
   let rot13Text = "";
-  for (let i = 0; i < text.length; i++) {
-    let charCode = text.charCodeAt(i);
-    if (charCode >= 65 && charCode <= 90) {
-      rot13Text += String.fromCharCode(((charCode - 65 + 13) % 26) + 65);
+  for (let i = 0; i < text.length; i++) { // For Loop that confirms the length of the text
+    let charCode = text.charCodeAt(i); // Obtains the character codes
+    if (charCode >= 65 && charCode <= 90) { 
+      rot13Text += String.fromCharCode(((charCode - 65 + 13) % 26) + 65); // Checks for Upper Case
     } else if (charCode >= 97 && charCode <= 122) {
-      rot13Text += String.fromCharCode(((charCode - 97 + 13) % 26) + 97);
+      rot13Text += String.fromCharCode(((charCode - 97 + 13) % 26) + 97); // Checks for Lower Case
     } else {
-      rot13Text += text.charAt(i);
+      rot13Text += text.charAt(i); // If not a letter, the character is left unchanged
     }
   }
   return rot13Text;
@@ -27,24 +30,37 @@ function rot13Text(text) {
 
 function toBinaryText(text) {
   let binaryText = "";
-  for (let i = 0; i < text.length; i++) {
-    let charCode = text.charCodeAt(i);
-    let binaryChar = charCode.toString(2);
-    binaryText += binaryChar.padStart(8, "0") + " ";
+  for (let i = 0; i < text.length; i++) { // Confirms the length of the text
+    let charCode = text.charCodeAt(i); // Obtains the character's code
+    let binaryChar = charCode.toString(2); // Converts to Binary, "2"
+    binaryText += binaryChar.padStart(8, "0") + " "; // Pads the resulting binary with 0's and concatenated by " " to separate the strings
   }
-  return binaryText.trim();
+  return binaryText.trim(); //returns the text trimmed.
 }
 
 function toText(binaryText) {
   let text = "";
-  let binaryChars = binaryText.trim().split(" ");
-  for (let i = 0; i < binaryChars.length; i++) {
-    let charCode = parseInt(binaryChars[i], 2);
-    let char = String.fromCharCode(charCode);
-    text += char;
+  let binaryChars = binaryText.trim().split(" "); //trims and splits the Binary text into characters
+  for (let i = 0; i < binaryChars.length; i++) { // For Loop that makes sure the length of the binary is correct
+    let charCode = parseInt(binaryChars[i], 2); // Parses the binary characters into unicode characters, hence the '2'
+    let char = String.fromCharCode(charCode); //Converts the unicode characters into a string
+    text += char; //Converts the string into text
+  }
+  return text; //returns the text
+}
+
+function binaryToHex(binaryText) {
+  if (/^[01]+$/.test(binaryText.value)) { // Checks if input is a valid binary string
+    let decimalOutput = parseInt(binaryText, 2); // Converts binary to decimal
+    let hexadecimalOutput = decimalOutput.toString(16); // Converts decimal to hexadecimal
+    toHex.value = hexadecimalOutput.toUpperCase(); // Displays hexadecimal output in uppercase
+  } else {
+    alert("Invalid input. Please enter a binary string."); // Alerts if the string is not binary.
   }
   return text;
 }
+
+// All the button functions for input and output
 
 function handleClickReverse() {
   let text = input.value;
@@ -69,7 +85,16 @@ function handleClickfromBinary() {
   output.value = binaryToText;
 }
 
+function handleClickBinarytoHex() {
+  let text = input.value;
+  let binaryToHex = toText(text);
+  output.value = binaryToHex;
+}
+
+//All the Event Listeners
+
 reverse.addEventListener('click', handleClickReverse);
 rot13.addEventListener('click', handleClickRot13);
 toBinary.addEventListener('click', handleClickToBinary);
 fromBinary.addEventListener('click', handleClickfromBinary);
+toHex.addEventListener('click', handleClickBinarytoHex);
