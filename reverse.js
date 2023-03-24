@@ -146,4 +146,3 @@ reverse.addEventListener('click', handleClickReverse);
 rot13.addEventListener('click', handleClickRot13);
 toBinary.addEventListener('click', handleClickToBinary);
 fromBinary.addEventListener('click', handleClickfromBinary);
-fromBinary.addEventListener('click', handleClickBinaryfromBinary);
