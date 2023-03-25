@@ -50,16 +50,29 @@ function toText(binaryText) {
 }
 
 function binaryToHex(binaryText) {
+  let regex = /^[01]+$/; // regular expression to match binary string
+
   if (Array.isArray(binaryText)) {
-    binaryText = binaryText.join("");
-  }
-  if (/^[01]+$/.test(binaryText)) {
+    let hexArray = [];
+    for (let i = 0; i < binaryText.length; i++) {
+      if (regex.test(binaryText[i])) { // apply regex to individual element
+        let decimalOutput = parseInt(binaryText[i], 2);
+        let hexadecimalOutput = decimalOutput.toString(16);
+        hexArray.push(hexadecimalOutput.toUpperCase());
+      } else {
+        alert("Invalid input. Please enter a binary string.");
+        return;
+      }
+    }
+    return hexArray;
+  } else if (regex.test(binaryText)) {
     let decimalOutput = parseInt(binaryText, 2);
-    let hexadecimalOutput = decimalOutput.toString(16); 
-    return hexadecimalOutput.toUpperCase(); 
+    let hexadecimalOutput = decimalOutput.toString(16);
+    return hexadecimalOutput.toUpperCase();
   } else {
     alert("Invalid input. Please enter a binary string.");
-   }}
+  }
+}
 
 // All the button functions for input and output
 
