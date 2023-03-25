@@ -50,15 +50,16 @@ function toText(binaryText) {
 }
 
 function binaryToHex(binaryText) {
-  if (/^[01]+$/.test(binaryText.value)) { // Checks if input is a valid binary string
-    let decimalOutput = parseInt(binaryText, 2); // Converts binary to decimal
-    let hexadecimalOutput = decimalOutput.toString(16); // Converts decimal to hexadecimal
-    toHex.value = hexadecimalOutput.toUpperCase(); // Displays hexadecimal output in uppercase
-  } else {
-    alert("Invalid input. Please enter a binary string."); // Alerts if the string is not binary.
+  if (Array.isArray(binaryText)) {
+    binaryText = binaryText.join("");
   }
-  return text;
-}
+  if (/^[01]+$/.test(binaryText)) {
+    let decimalOutput = parseInt(binaryText, 2);
+    let hexadecimalOutput = decimalOutput.toString(16); 
+    return hexadecimalOutput.toUpperCase(); 
+  } else {
+    alert("Invalid input. Please enter a binary string.");
+   }}
 
 // All the button functions for input and output
 
@@ -86,9 +87,14 @@ function handleClickfromBinary() {
 }
 
 function handleClickBinarytoHex() {
-  let text = input.value;
-  let binaryToHex = toText(text);
-  output.value = binaryToHex;
+  let input = document.getElementById("input").value;
+  let output = document.getElementById("output");
+  let hexArray = binaryToHex(input);
+  if (hexArray.length > 0) {
+    output.textContent = hexArray[0];
+  } else {
+    output.textContent = ""; 
+  }
 }
 
 //All the Event Listeners
