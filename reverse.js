@@ -50,29 +50,20 @@ function toText(binaryText) {
 }
 
 function binaryToHex(binaryText) {
-  let regex = /^[01]+$/; // regular expression to match binary string
-
-  if (Array.isArray(binaryText)) {
-    let hexArray = [];
-    for (let i = 0; i < binaryText.length; i++) {
-      if (regex.test(binaryText[i])) { // apply regex to individual element
-        let decimalOutput = parseInt(binaryText[i], 2);
-        let hexadecimalOutput = decimalOutput.toString(16);
-        hexArray.push(hexadecimalOutput.toUpperCase());
-      } else {
-        alert("Invalid input. Please enter a binary string.");
-        return;
-      }
-    }
-    return hexArray;
-  } else if (regex.test(binaryText)) {
-    let decimalOutput = parseInt(binaryText, 2);
-    let hexadecimalOutput = decimalOutput.toString(16);
-    return hexadecimalOutput.toUpperCase();
-  } else {
-    alert("Invalid input. Please enter a binary string.");
+	let hexArray = [];
+	// Split the binary text into array of binary strings
+  // E.g., "01110100 01110100" becomes ["01110100", "01110100"]
+  let binaryArray = binaryText.split(' ');
+  
+  // Loop through the arrya of binary strings
+  for (let i = 0; i < binaryArray.length; i++) {
+  	// Parse the binary string into a decimal number
+    let decimal = parseInt(binaryArray[i], 2);
+    // Convert the decimal number to a hex string
+    let hex = decimal.toString(16).toUpperCase();
+    // Add to the result
+    hexArray.push(hex);
   }
-}
 
 // All the button functions for input and output
 
@@ -100,14 +91,9 @@ function handleClickfromBinary() {
 }
 
 function handleClickBinarytoHex() {
-  let input = document.getElementById("input").value;
-  let output = document.getElementById("output");
-  let hexArray = binaryToHex(input);
-  if (hexArray.length > 0) {
-    output.textContent = hexArray[0];
-  } else {
-    output.textContent = ""; 
-  }
+	let binary = input.value;
+  let hex = binaryToHex(binary);
+  output.value = hex;
 }
 
 //All the Event Listeners
