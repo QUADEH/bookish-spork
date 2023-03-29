@@ -6,6 +6,7 @@ let input = document.querySelector("#input"); // "input" ID in the HTML
 let output = document.querySelector("#output");// "output" ID in the HTML
 let fromBinary = document.querySelector("#fromBinary"); // "fromBinary" ID in the HTML
 let toHex = document.querySelector("#toHex"); // "toHex" ID in the HTML
+let hexToBinary = document.querySelector("#binaryH"); // "hexToBinary" ID in the HTML
 
 
 function reverseText(text) {
@@ -50,20 +51,29 @@ function toText(binaryText) {
 }
 
 function binaryToHex(binaryText) {
-	let hexArray = [];
-	// Split the binary text into array of binary strings
-  // E.g., "01110100 01110100" becomes ["01110100", "01110100"]
   let binaryArray = binaryText.split(' ');
+   let hexArray = binaryArray.map(binary => {
+    let decimal = parseInt(binary, 2);
+     let hex = decimal.toString(16);
+     return hex.toUpperCase();
+   });
+   return hexArray.join(' ');
+ }
+
+
+function binaryFromHex(hexString) {
+  // Convert hex string to byte array
+  const bytes = hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16));
   
-  // Loop through the arrya of binary strings
-  for (let i = 0; i < binaryArray.length; i++) {
-  	// Parse the binary string into a decimal number
-    let decimal = parseInt(binaryArray[i], 2);
-    // Convert the decimal number to a hex string
-    let hex = decimal.toString(16).toUpperCase();
-    // Add to the result
-    hexArray.push(hex);
-  }
+  // Convert byte array to binary string
+  let binaryString = '';
+  bytes.forEach(byte => {
+    // Pad the binary representation with leading zeros as necessary
+    binaryString += byte.toString(2).padStart(8, '0');
+  });
+  
+  return binaryString;
+}
 
 // All the button functions for input and output
 
@@ -91,9 +101,15 @@ function handleClickfromBinary() {
 }
 
 function handleClickBinarytoHex() {
-	let binary = input.value;
+  let binary = input.value;
   let hex = binaryToHex(binary);
   output.value = hex;
+}
+
+function handleClickHexToBinary() {
+  let hex = input.value;
+  let binary = hexToBinary(hex);
+  output.value = binary;
 }
 
 //All the Event Listeners
@@ -103,3 +119,4 @@ rot13.addEventListener('click', handleClickRot13);
 toBinary.addEventListener('click', handleClickToBinary);
 fromBinary.addEventListener('click', handleClickfromBinary);
 toHex.addEventListener('click', handleClickBinarytoHex);
+binaryH.addEventListener('click', handleClickHexToBinary);
