@@ -67,7 +67,7 @@ function binaryFromHex(hexString) {
        let binary = decimal.toString(2);
        return binary.trim(' ');
     })
-    return binaryString
+    return binaryString;
 
 // All the button functions for input and output
 
