@@ -62,17 +62,8 @@ function binaryToHex(binaryText) {
 
 
 function binaryFromHex(hexString) {
-  // Convert hex string to byte array
-  const bytes = hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16));
-  
-  // Convert byte array to binary string
-  let binaryString = '';
-  bytes.forEach(byte => {
-    // Pad the binary representation with leading zeros as necessary
-    binaryString += byte.toString(2).padStart(8, '0');
-  });
-  
-  return binaryString;
+  const binaryString = parseInt(hexString, 16).toString(2);
+  return binaryString.padStart(hexString.length * 4, '0');
 }
 
 // All the button functions for input and output
@@ -101,14 +92,14 @@ function handleClickfromBinary() {
 }
 
 function handleClickBinarytoHex() {
-  let binary = input.value;
+	let binary = input.value;
   let hex = binaryToHex(binary);
   output.value = hex;
 }
 
 function handleClickHexToBinary() {
   let hex = input.value;
-  let binary = hexToBinary(hex);
+  let binary = binaryFromHex(hex);
   output.value = binary;
 }
 
