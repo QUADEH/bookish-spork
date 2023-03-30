@@ -63,12 +63,12 @@ function binaryToHex(binaryText) {
 
 function binaryFromHex(hexString) {
   let hexArray = hexString.split(' ');
-    let binaryString = hexArray.map(hex => {
+    let binaryArray = hexArray.map(hex => {
       let decimal = parseInt(hex, 16);
        let binary = decimal.toString(2);
        return binary.trim(' ');
     })
-    return binaryString;
+    return binaryArray.join(' ');
 }
 
 // All the button functions for input and output
