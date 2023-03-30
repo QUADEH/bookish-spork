@@ -60,11 +60,14 @@ function binaryToHex(binaryText) {
    return hexArray.join(' ');
  }
 
-
 function binaryFromHex(hexString) {
-  const binaryString = parseInt(hexString, 16).toString(2);
-  return binaryString.padStart(hexString.length * 4, '0');
-}
+  let hexArray = hexString.split(' ');
+    let binaryString = hexArray.map(hex => {
+      let decimal = parseInt(hex, 16);
+       let binary = decimal.toString(2);
+       return binary.trim(' ');
+    })
+    return binaryString
 
 // All the button functions for input and output
 
