@@ -60,6 +60,7 @@ function binaryToHex(binaryText) {
    return hexArray.join(' ');
  }
 
+
 function binaryFromHex(hexString) {
   let hexArray = hexString.split(' ');
     let binaryString = hexArray.map(hex => {
@@ -68,6 +69,7 @@ function binaryFromHex(hexString) {
        return binary.trim(' ');
     })
     return binaryString;
+}
 
 // All the button functions for input and output
 
