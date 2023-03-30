@@ -66,7 +66,8 @@ function binaryFromHex(hexString) {
     let binaryArray = hexArray.map(hex => {
       let decimal = parseInt(hex, 16);
        let binary = decimal.toString(2);
-       return binary.trim(' ');
+       hexArray =+ binary.padStart(8, "0") + " ";
+       return binary.trim();
     })
     return binaryArray.join(' ');
 }
