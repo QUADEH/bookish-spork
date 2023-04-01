@@ -59,15 +59,14 @@ function binaryToHex(binaryText) {
    });
    return hexArray.join(' ');
  }
-
-
+ 
 function binaryFromHex(hexString) {
   let hexArray = hexString.split(' ');
     let binaryArray = hexArray.map(hex => {
       let decimal = parseInt(hex, 16);
        let binary = decimal.toString(2);
-       hexArray =+ binary.padStart(8, "0") + " ";
-       return binary.trim();
+       let byte = binary.padStart(8, '0');
+       return byte;
     })
     return binaryArray.join(' ');
 }
